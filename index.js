@@ -30,20 +30,10 @@ app.use("/api/users", userRoutes);
 const PORT = process.env.PORT || 5000;
 
 // MongoDB connection
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
+mongoose.connect("mongodb+srv://tejkumar29aug:Tej.Kumar123%40@cluster0.sv7jn.mongodb.net/movemystuff")
+  .then(() => {
     console.log("MongoDB Connected");
-    
-    // Start server after successful database connection
-    app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
-    });
-  } catch (error) {
-    console.error("MongoDB connection error:", error.message);
-    process.exit(1);
-  }
-};
-
-// Initialize the server
-connectDB();
+  })
+  .catch((err) => {
+    console.log("MongoDB Connection Error: ", err);
+  });
